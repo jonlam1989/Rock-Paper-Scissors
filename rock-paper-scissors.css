@@ -7,19 +7,22 @@ body {
 	color: white;
 }
 
-.container {
+.main-container {
 	text-align: center;
 	letter-spacing: 4px;
 }
+
+/* ---------------------------------------------------------- */
 
 .s1-container {
 	font-size: 5em;
 }
 
+/* ---------------------------------------------------------- */
+
 .section2 {
 	width: 50vw;
 	margin: 0 auto;
-	margin-bottom: 4em;
 }
 
 .s2-container {
@@ -28,10 +31,24 @@ body {
 	align-items: center;
 }
 
+.s2-imgContainer {
+	width: 4vw;
+	margin: 1em auto 0;
+}
+
+.s2-imgContainer img {
+	width: 100%;
+	visibility: hidden;
+}
+
+/* ---------------------------------------------------------- */
+
 .section3 {
 	height: 2em;
-	margin-bottom: 2em;
+	margin: -1em auto 2em;
 }
+
+/* ---------------------------------------------------------- */
 
 .s4-container {
 	display: flex;
