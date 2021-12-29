@@ -1,1 +1,54 @@
+body {
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	background-color: rgb(6, 6, 71);
+	font-family: 'Quantico', sans-serif;
+	color: white;
+}
 
+.container {
+	text-align: center;
+	letter-spacing: 4px;
+}
+
+.s1-container {
+	font-size: 5em;
+}
+
+.section2 {
+	width: 50vw;
+	margin: 0 auto;
+	margin-bottom: 4em;
+}
+
+.s2-container {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.section3 {
+	height: 2em;
+	margin-bottom: 2em;
+}
+
+.s4-container {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: flex-end;
+}
+
+.s4-container div {
+	width: 14vw;
+}
+
+.s4-container div img {
+	width: 100%;
+	transition: 0.4s;
+}
+
+.s4-container div img:hover {
+	cursor: pointer;
+	box-shadow: 0 0 5em black;
+}

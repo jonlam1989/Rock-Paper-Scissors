@@ -4,23 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="wth=device-wth, initial-scale=1.0">
     <link rel="stylesheet" href="rock-paper-scissors.css">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">
+    <title>Rock|Paper|Scissors</title>
 </head>
 
 <body>
     <div class="container">
-        <div id="section1">
-            ROCK, PAPER, SCISSORS!
+        <div class="section1">
+            <div class="s1-container">
+                ROCK | PAPER | SCISSORS
+            </div>
         </div>
-        <div id="section2">
 
+        <div class="section2">
+            <div class="s2-container">
+                <div class="s2-man">
+                    <h1>MAN</h1>
+                    <p>Score : </p>
+                    <span id="humanScore">0 / 5</span>
+                </div>
+                <div>vs</div>
+                <div class="s2-machine">
+                    <h1>MACHINE</h1>
+                    <p>Score : </p>
+                    <span id="machineScore">0 / 5</span>
+                </div>
+            </div>
         </div>
-        <div id="section3">
 
+        <div class="section3">
+            <div class="s3-container">
+                <p>Defeat the Machine in a best of 5 games!</p>
+                <p id="message">GAME START...</p>
+            </div>
+        </div>
+
+        <div class="section4">
+            <div class="s4-container">
+                <div id="rock"><img src="resources/1rock.png" alt="rock"></div>
+                <div id="paper"><img src="resources/2paper.png" alt="paper"></div>
+                <div id="scissors"><img src="resources/3scissors.png" alt="scissors"></div>
+            </div>
         </div>
     </div>
+
     <script src="rock-paper-scissors.js"></script>
 </body>
 
