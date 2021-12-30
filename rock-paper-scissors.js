@@ -5,6 +5,8 @@ let instructions = document.querySelector('#gameInstructions')
 let msg = document.querySelector('#message')
 let humanScoreContainer = document.querySelector('#humanScore')
 let machineScoreContainer = document.querySelector('#machineScore')
+let humanImgContainer = document.querySelector('#humanImg')
+let machineImgContainer = document.querySelector('#machineImg')
 
 //animate text to display one letter at a time
 //resources:
@@ -81,7 +83,15 @@ function computerHand() {
 for (let el of imgArr) {
     el.addEventListener('click', ()=>{
         machineHand = computerHand()
+        machineImgContainer.src = `resources/${machineHand}.png`
+        machineImgContainer.alt = `${machineHand}`
+        machineImgContainer.style.visibility = 'visible'
+
         humanHand = el.firstElementChild[attribute='alt']
+        humanImgContainer.src = `resources/${humanHand}.png`
+        humanImgContainer.alt = `${humanHand}`
+        humanImgContainer.style.visibility = 'visible'
+        
         compareHand(machineHand, humanHand)
         isGameOver()
     })
@@ -89,7 +99,15 @@ for (let el of imgArr) {
 
 //check for a winner / or a tie
 function compareHand(machineHand, humanHand) {
-    if (machineHand === humanHand) displayMsg("It's a tie!", 600)
+    if (machineHand === humanHand) {
+        setTimeout(()=>{
+            machineImgContainer.style.transition = `0.3s`
+            humanImgContainer.style.transition = `0.3s`
+            machineImgContainer.style.visibility = 'hidden'
+            humanImgContainer.style.visibility = 'hidden'
+        }, 900)
+        displayMsg("It's a tie!", 1000)  
+    } 
     if (machineHand === 'rock' && humanHand === 'paper') humanWin()
     if (machineHand === 'rock' && humanHand === 'scissors') machineWin()
     if (machineHand === 'paper' && humanHand === 'rock') machineWin()
@@ -113,15 +131,23 @@ function displayMsg(text, ms) {
 function humanWin() {
     humanScore++
     humanScoreContainer.innerHTML = `${humanScore} / 5`
+    setTimeout(()=>{
+        machineImgContainer.style.transition = `0.3s`
+        machineImgContainer.style.visibility = 'hidden'
+    }, 1000)
 }
 
 function machineWin() {
     machineScore++
     machineScoreContainer.innerHTML = `${machineScore} / 5`
+    setTimeout(()=>{
+        humanImgContainer.style.transition = `0.3s`
+        humanImgContainer.style.visibility = 'hidden'
+    }, 1000)
 }
 
 //check for end of game
 function isGameOver() {
     if (humanScore === 5) displayMsg('GAME OVER...you win!', 4000)
-    if (machineScore === 5) displayMsg('GAME OVER...you lose, please try again', 4000)  
+    if (machineScore === 5) displayMsg('GAME OVER...you lose, please try again', 4000)
 }
