@@ -7,6 +7,11 @@ let humanScoreContainer = document.querySelector('#humanScore')
 let machineScoreContainer = document.querySelector('#machineScore')
 let humanImgContainer = document.querySelector('#humanImg')
 let machineImgContainer = document.querySelector('#machineImg')
+let audio = document.querySelector('audio')
+let gameContainer = document.querySelector('.game-container')
+let gameOverContainer = document.querySelector('.gameOver-container')
+let gameOverMsg = document.querySelector('#gameOver-msg')
+let playAgain = document.querySelector('#playAgain')
 
 //animate text to display one letter at a time
 //resources:
@@ -23,34 +28,25 @@ function printOut(text, container) {
 }
 
 function appendLetter(char, container) {
-    if (char) {
-        container.innerHTML += char
-    }
+    if (char) container.innerHTML += char
 }
 
 //display one message at a time
 //resources:
     // https://stackoverflow.com/questions/48142511/how-do-i-fade-out-a-div-using-pure-javascript
-function one(callback) {
+function startMsg(callback1, callback2) {
     printOut(instructionText, instructions)
-    setTimeout(callback, 2000)
-    setTimeout(()=>{
-        msg.style.transition = '1s'
-        msg.style.opacity = '0'
-        msg.style.visibility = 'hidden'
-    }, 4000)
-    setTimeout(()=>{
-        instructions.style.transition = '1s'
-        instructions.style.opacity = '0'
-        instructions.style.visibility = 'hidden'
-    }, 5000)
+    setTimeout(callback1, 2000)
+    setTimeout(callback2, 6000)
 }
 
-function two() {
+function endMsg() {
     printOut(msgText, msg)
+    setTimeout(()=>{fadeOut(msg, 1)}, 3000)
+    setTimeout(()=>{fadeOut(instructions, 1)}, 4000)
 }
 
-one(two)
+startMsg(endMsg, handleClick)
 
 //animate images
 const imgArr = [rock, paper, scissors];
@@ -79,33 +75,31 @@ function computerHand() {
     return hand[randomIdx]
 }
 
-//main game logic
-for (let el of imgArr) {
-    el.addEventListener('click', ()=>{
-        machineHand = computerHand()
-        machineImgContainer.src = `resources/${machineHand}.png`
-        machineImgContainer.alt = `${machineHand}`
-        machineImgContainer.style.visibility = 'visible'
+//game logic
+function handleClick() {
+    for (let el of imgArr) {
+        el.addEventListener('click', ()=>{
+            machineHand = computerHand()
+            machineImgContainer.src = `resources/${machineHand}.png`
+            machineImgContainer.alt = `${machineHand}`
+            fadeIn(machineImgContainer, 0)
+    
+            humanHand = el.firstElementChild[attribute='alt']
+            humanImgContainer.src = `resources/${humanHand}.png`
+            humanImgContainer.alt = `${humanHand}`
+            fadeIn(humanImgContainer, 0)
 
-        humanHand = el.firstElementChild[attribute='alt']
-        humanImgContainer.src = `resources/${humanHand}.png`
-        humanImgContainer.alt = `${humanHand}`
-        humanImgContainer.style.visibility = 'visible'
-        
-        compareHand(machineHand, humanHand)
-        isGameOver()
-    })
+            compareHand(machineHand, humanHand)
+            isGameOver()
+            audio.play()
+        })
+    }
 }
 
 //check for a winner / or a tie
 function compareHand(machineHand, humanHand) {
     if (machineHand === humanHand) {
-        setTimeout(()=>{
-            machineImgContainer.style.transition = `0.3s`
-            humanImgContainer.style.transition = `0.3s`
-            machineImgContainer.style.visibility = 'hidden'
-            humanImgContainer.style.visibility = 'hidden'
-        }, 900)
+        setTimeout(()=>{fadeOut(machineImgContainer, 0.3), fadeOut(humanImgContainer, 0.3)}, 900)
         displayMsg("It's a tie!", 1000)  
     } 
     if (machineHand === 'rock' && humanHand === 'paper') humanWin()
@@ -118,36 +112,54 @@ function compareHand(machineHand, humanHand) {
 
 function displayMsg(text, ms) {
     msg.innerHTML = text
-    msg.style.transition = '0s'
-    msg.style.opacity = '1'
-    msg.style.visibility = 'visible'
-    setTimeout(()=>{
-        msg.style.transition = `0.3s`
-        msg.style.opacity = '0'
-        msg.style.visibility = 'hidden'
-    }, ms)
+    fadeIn(msg, 0)
+    setTimeout(()=>{fadeOut(msg, 0.3)}, ms)
 }
 
 function humanWin() {
     humanScore++
     humanScoreContainer.innerHTML = `${humanScore}`
-    setTimeout(()=>{
-        machineImgContainer.style.transition = `0.3s`
-        machineImgContainer.style.visibility = 'hidden'
-    }, 1000)
+    setTimeout(()=>{fadeOut(machineImgContainer, 0.3)}, 1000)
 }
 
 function machineWin() {
     machineScore++
     machineScoreContainer.innerHTML = `${machineScore}`
-    setTimeout(()=>{
-        humanImgContainer.style.transition = `0.3s`
-        humanImgContainer.style.visibility = 'hidden'
-    }, 1000)
+    setTimeout(()=>{fadeOut(humanImgContainer, 0.3)}, 1000)
+}
+
+function fadeOut(el, ms) {
+    el.style.transition = `${ms}s`
+    el.style.opacity = '0'
+    el.style.visibility = 'hidden'
+}
+
+function fadeIn(el, ms) {
+    el.style.transition = `${ms}s`
+    el.style.opacity = '1'
+    el.style.visibility = 'visible'
 }
 
 //check for end of game
 function isGameOver() {
-    if (humanScore === 5) displayMsg('GAME OVER...you win!', 4000)
-    if (machineScore === 5) displayMsg('GAME OVER...you lose, please try again', 4000)
+    if (humanScore === 5 || machineScore === 5) {
+        fadeOut(gameContainer, 1)
+        setTimeout(()=>{
+            gameContainer.style.position = 'absolute'
+            gameOverContainer.classList.add('gameOver')
+            if (humanScore === 5) gameOverMsg.innerHTML = 'GAME OVER...you win!'
+            if (machineScore === 5) gameOverMsg.innerHTML = 'GAME OVER...you lose!'
+        }, 1000)
+       resetGame()
+    }
+}
+
+function resetGame() {
+    playAgain.addEventListener('mousedown', ()=>{
+        playAgain.style.transition = '0.2s'
+        playAgain.style.transform = 'translate(3px, -3px)'
+    })
+    playAgain.addEventListener('mouseup', ()=>{
+        playAgain.style.transform = 'translate(-3px, 3px)'
+    })
 }

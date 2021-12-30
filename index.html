@@ -13,47 +13,59 @@
 </head>
 
 <body>
+    <div class="background">
+        <audio src="resources/button-click.mp3"></audio>
+    </div>
+
     <div class="main-container">
-        <div class="section1">
-            <div class="s1-container">
-                ROCK | PAPER | SCISSORS
-            </div>
-        </div>
-
-        <div class="section2">
-            <div class="s2-container">
-                <div class="s2-man">
-                    <h1>MAN</h1>
-                    <p>Score : </p>
-                    <span id="humanScore">0</span>
-                    <div class="s2-imgContainer"><img id="humanImg" src="resources/rock.png" alt="rock"></div>
-                </div>
-                <div>vs</div>
-                <div class="s2-machine">
-                    <h1>MACHINE</h1>
-                    <p>Score : </p>
-                    <span id="machineScore">0</span>
-                    <div class="s2-imgContainer"><img id="machineImg" src="resources/paper.png" alt="paper"></div>
+        <div class="game-container">
+            <div class="section1">
+                <div class="s1-container">
+                    ROCK | PAPER | SCISSORS
                 </div>
             </div>
-        </div>
 
-        <div class="section3">
-            <div class="s3-container">
-                <p id="gameInstructions"></p>
-                <p id="message"></p>
+            <div class="section2">
+                <div class="s2-container">
+                    <div class="s2-man">
+                        <h1>MAN</h1>
+                        <p>Score : </p>
+                        <span id="humanScore">0</span>
+                        <div class="s2-imgContainer"><img id="humanImg" src="resources/rock.png" alt="rock"></div>
+                    </div>
+                    <div>vs</div>
+                    <div class="s2-machine">
+                        <h1>MACHINE</h1>
+                        <p>Score : </p>
+                        <span id="machineScore">0</span>
+                        <div class="s2-imgContainer"><img id="machineImg" src="resources/paper.png" alt="paper"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section3">
+                <div class="s3-container">
+                    <p id="gameInstructions"></p>
+                    <p id="message"></p>
+                </div>
+            </div>
+
+            <div class="section4">
+                <div class="s4-container">
+                    <div id="rock"><img src="resources/rock.png" alt="rock"></div>
+                    <div id="paper"><img src="resources/paper.png" alt="paper"></div>
+                    <div id="scissors"><img src="resources/scissors.png" alt="scissors"></div>
+                </div>
             </div>
         </div>
 
-        <div class="section4">
-            <div class="s4-container">
-                <div id="rock"><img src="resources/rock.png" alt="rock"></div>
-                <div id="paper"><img src="resources/paper.png" alt="paper"></div>
-                <div id="scissors"><img src="resources/scissors.png" alt="scissors"></div>
+        <div class="gameOver-container">
+            <div class="gameOver-content">
+                <h1 id="gameOver-msg"></h1>
+                <a id="playAgain" href="index.html">Play again?</a>
             </div>
         </div>
     </div>
-
     <script src="rock-paper-scissors.js"></script>
 </body>
 
