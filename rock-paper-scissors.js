@@ -130,7 +130,7 @@ function displayMsg(text, ms) {
 
 function humanWin() {
     humanScore++
-    humanScoreContainer.innerHTML = `${humanScore} / 5`
+    humanScoreContainer.innerHTML = `${humanScore}`
     setTimeout(()=>{
         machineImgContainer.style.transition = `0.3s`
         machineImgContainer.style.visibility = 'hidden'
@@ -139,7 +139,7 @@ function humanWin() {
 
 function machineWin() {
     machineScore++
-    machineScoreContainer.innerHTML = `${machineScore} / 5`
+    machineScoreContainer.innerHTML = `${machineScore}`
     setTimeout(()=>{
         humanImgContainer.style.transition = `0.3s`
         humanImgContainer.style.visibility = 'hidden'
